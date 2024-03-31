@@ -5,13 +5,14 @@ from Algorithm1 import H
 
 
 # Example:
+Sigma_o = {'a12', 'a23', 'a30', 'b24', 'b45', 'b62', 'c47'}#set of observable events
+Sigma_uo={'a01', 'b56'}#set of unobservable events
+Sigma_vs={'a23', 'b24', 'c37', 'c47'}#set of vulnerable sensor events
+Sigma_va={'c37', 'c47'}#set of vulnerable actuator events
 
-Sigma_uo={'a'}
-Sigma_o={'b', 'c', 'd', 'e', 'f', 'g'}
-Sigma_vs={'c', 'd', 'e'}
-Sigma_va={'d'}
 
-theta=[('a', 'na', 'a'), ('b', 'na', 'b'), ('c', 'sr', 'e'), ('d', 'as', 'varepsilon')]
+
+theta=[('a01', 'na', 'a01'), ('a12', 'na', 'a12'), ('b24', 'sr', 'a23'), ('c47', 'as', 'varepsilon')]
 
 """ lambda_theta=[item[0] for item in theta]
 nu_theta=[item[2] for item in theta]

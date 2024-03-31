@@ -19,13 +19,13 @@ def C_ae(sigma, Cost):
 #Example
 Sigma = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c47'}#set of events
 Sigma_uo={'a01', 'b56'}#set of unobservable events
-Sigma_vs={'a23', 'b24', 'c47'}#set of vulnerable sensor events
-Sigma_va={'c47'}#set of vulnerable actuator events
+Sigma_vs={'a23', 'b24', 'c37', 'c47'}#set of vulnerable sensor events
+Sigma_va={'c37', 'c47'}#set of vulnerable actuator events
 X_us={'7'}#unsafe state set
 #Resource assumption assignment
 c_ir=30
-Costvs={'a23': 10, 'b24': 5, 'c47': 10}#resource consumption of SR-attack on event
-Costva={'c47' : 15}#resource consumption of AE-attack on event
+Costvs={'a23': 8, 'b24': 5, 'c37': 11, 'c47': 9}#resource consumption of SR-attack on event
+Costva={'c37': 20, 'c47' : 16}#resource consumption of AE-attack on event
 
 
 #Resource consumption of attacks in an attack string
