@@ -1,7 +1,7 @@
 # CA
-Hardware Configuration: Intel Core i5 CPU@2.50GHz 6Cores, 16GB RAM, 1TB SSD, Windows 10;
+Hardware Configuration: AMD Ryzen 7 CPU@3.20GHz, 16GB RAM, Windows 10;
 
-Python version: 3.12;
+Python version: 3.10;
 
 DFA: build a deterministic finite state automaton;
 
