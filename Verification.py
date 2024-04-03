@@ -17,7 +17,7 @@ def C_ae(sigma, Cost):
 
 
 #Example
-Sigma = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c47'}#set of events
+Sigma = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c37', 'c47'}#set of events
 Sigma_uo={'a01', 'b56'}#set of unobservable events
 Sigma_vs={'a23', 'b24', 'c37', 'c47'}#set of vulnerable sensor events
 Sigma_va={'c37', 'c47'}#set of vulnerable actuator events
@@ -59,6 +59,7 @@ initial_state_e=(G.initial_state, Ha.initial_state_ha, c_ir)
 states_e={initial_state_e}
 attack_events=Ha.attack_events
 transition_function_e=set()
+#build the event set and transitions of an estimator
 def Get_states_e(state_e):
     for attack_event in attack_events:
         if attack_event[0] in G.active_events(state_e[0]) and attack_event in pre_active_events_Ha(state_e[1], Ha.transition_function_ha) and state_e[2]>= C(attack_event) and attack_event[1] in {'sr', 'as'}:
@@ -87,6 +88,7 @@ Get_states_e(initial_state_e)
 #Construction of an estimator
 E = Estimator(states_e, attack_events, transition_function_e, initial_state_e)
 
+#print the obtained estimator for test
 print("This is an estimator with respect to S/G and c_ir:")
 print("     The set of states:", E.states_e)
 #print("The set of attack events:", Ha.attack_events)

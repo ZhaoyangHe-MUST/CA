@@ -22,8 +22,9 @@ class DFA:
 
 
 # Example:
-states = {'0', '1', '2', '3', '4', '5', '6', '7'}
-events = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c47'}
+
+states = {'0', '1', '2', '3', '4', '5', '6', '7'}#set of states
+events = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c37', 'c47'}#set of events
 transition_function = {
     ('0', 'a01', '1'),
     ('1', 'a12', '2'),
@@ -35,11 +36,13 @@ transition_function = {
     ('4', 'c47', '7'),
     ('5', 'b56', '6'),
     ('6', 'b62', '2')
-}
-initial_state = '0'
+}#transitions
+initial_state = '0'#initial state
 
+#build a DFA
 G = DFA(states, events, transition_function, initial_state)
 
+#print DFA G for test
 def print_G():
     print("This is a plant G:")
     print("The set of states:", G.states)

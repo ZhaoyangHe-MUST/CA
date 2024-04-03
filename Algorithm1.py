@@ -11,8 +11,8 @@ class HA:
 
 
 # Example:
-states = {'0', '1', '2', '3', '4'}
-events = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c47'}
+states = {'0', '1', '2', '3', '4'}#set of states of a supervisor realization
+events = {'a01', 'a12', 'a23', 'a30', 'b24', 'b45', 'b56', 'b62', 'c37', 'c47'}#set of events of a supervisor realization
 transition_function = {
     ('0', 'a01', '0'),
     ('0', 'b56', '0'),
@@ -30,10 +30,10 @@ transition_function = {
     ('4', 'a01', '4'),
     ('4', 'b56', '4'),
     ('4', 'b62', '1')
-}
-initial_state = '0'
+}#transitions of a supervisor realization
+initial_state = '0'#initial state of a supervisor realization
 
-H = DFA.DFA(states, events, transition_function, initial_state)
+H = DFA.DFA(states, events, transition_function, initial_state)#construct a supervisor realization H
 
 # Test
 """ print("This is a supervisor realization H:")
@@ -41,9 +41,9 @@ print("The set of states:", H.states)
 print("The set of events:", H.events)
 print("Transition function f:", H.transition_function)
 print("initial state:", H.initial_state) """
-Sigma_uo={'a01', 'b56'}
-Sigma_vs={'a23', 'b24', 'c37', 'c47'}
-Sigma_va={'c37', 'c47'}
+Sigma_uo={'a01', 'b56'}#set of unobservable events
+Sigma_vs={'a23', 'b24', 'c37', 'c47'}#set of vulnerable sensor events
+Sigma_va={'c37', 'c47'}#set of vulnerable actuator events
 #----------------------------------------------------------------------------
 #Algorithm 1: Construction of a corrupted supervisor under acceptable attacks
 #----------------------------------------------------------------------------
@@ -84,21 +84,21 @@ for xh in states_Xh:
         if event in H.active_events(xh):
             transition_function_ha.add((xh, (event, 'na', event), H.current_state(xh, event)))
 
-def pre_active_events_Ha(x, tfs):
+def pre_active_events_Ha(x, tfs):#obtain \Gamma_{H_{a}}(x) 
     pre_ae_set=set()
     for tf in tfs:
         if tf[0]==x:
            pre_ae_set.add(tf[1]) 
     return pre_ae_set
 
-def current_state_Ha(x, ae, tfs):
+def current_state_Ha(x, ae, tfs):#obtain the current state in H_{a} after an attack event occurs ae at x
     cstate = ''
     for tf in tfs:
         if tf[0]==x and tf[1]==ae:
             cstate = tf[2]
     return cstate
 
-
+#Lines 5--18:
 for event in Sigma_vs:
     for xh in states_Xh:
         if (event, 'na', event) in pre_active_events_Ha(xh, transition_function_ha):
@@ -121,8 +121,9 @@ for event in Sigma_vs:
                 if (reading, 'na', reading) in pre_active_events_Ha(xh, transition_function_ha) and (event, 'as', reading) not in pre_active_events_Ha(xh, transition_function_ha):
                     transition_function_ha.add((xh, (event, 'as', reading), current_state_Ha(xh, (reading, 'na', reading), transition_function_ha)))    
 
-Ha = HA(states_Xh, attack_events, transition_function_ha, initial_state_ha)
+Ha = HA(states_Xh, attack_events, transition_function_ha, initial_state_ha)#construct a corrupted supervisor H_{a}
 
+#print H_{a} for test
 def print_Ha():
     print("This is a corrupted supervisor H_a:")
     print("     The set of states:", Ha.states_Xh)

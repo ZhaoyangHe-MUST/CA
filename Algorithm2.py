@@ -5,24 +5,15 @@ from Algorithm1 import H
 
 
 # Example:
-Sigma_o = {'a12', 'a23', 'a30', 'b24', 'b45', 'b62', 'c47'}#set of observable events
+Sigma_o = {'a12', 'a23', 'a30', 'b24', 'b45', 'b62', 'c37', 'c47'}#set of observable events
 Sigma_uo={'a01', 'b56'}#set of unobservable events
 Sigma_vs={'a23', 'b24', 'c37', 'c47'}#set of vulnerable sensor events
 Sigma_va={'c37', 'c47'}#set of vulnerable actuator events
 
 
-
+#given a feasible attack string \theta
 theta=[('a01', 'na', 'a01'), ('a12', 'na', 'a12'), ('b24', 'sr', 'a23'), ('c47', 'as', 'varepsilon')]
 
-""" lambda_theta=[item[0] for item in theta]
-nu_theta=[item[2] for item in theta]
-
-Po_lambda_theta=[sigma for sigma in lambda_theta if sigma in Sigma_o]
-Po_nu_theta=[sigma for sigma in nu_theta if sigma in Sigma_o]
-
-print("", lambda_theta, nu_theta)
-
-print("", Po_lambda_theta, Po_nu_theta) """
 #lambda_theta: project theta to a string of events
 def lambda_theta(theta):
     return [item[0] for item in theta]
@@ -31,7 +22,7 @@ def lambda_theta(theta):
 def nu_theta(theta):
     return [item[2] for item in theta]
 
-#projection P_o
+#natural projection P_o
 def projection(string, Sigma):
     return [sigma for sigma in string if sigma in Sigma]
 
@@ -55,6 +46,8 @@ def control_command(string, dfa):
 #----------------------------------------------------------------------------
 #Input:  A feasible attack string \theta and a supervisor S
 #Output: A_sr and A_ae, synthesized SR-attacks and AEattacks
+
+#initial
 A_sr=[]
 A_ae=[]
 i=0
