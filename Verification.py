@@ -64,7 +64,6 @@ def Get_states_e(state_e):
     for attack_event in attack_events:
         if attack_event[0] in G.active_events(state_e[0]) and attack_event in pre_active_events_Ha(state_e[1], Ha.transition_function_ha) and state_e[2]>= C(attack_event) and attack_event[1] in {'sr', 'as'}:
            current_state_e=(G.current_state(state_e[0], attack_event[0]), current_state_Ha(state_e[1], attack_event, Ha.transition_function_ha), state_e[2]-C(attack_event))
-           print("ce1= ", current_state_e)
            if current_state_e in states_e and (state_e, attack_event, current_state_e) not in transition_function_e:
                transition_function_e.add((state_e, attack_event, current_state_e))
            if current_state_e not in states_e:
@@ -74,7 +73,6 @@ def Get_states_e(state_e):
                Get_states_e(current_state_e)
         if attack_event[0] in G.active_events(state_e[0]) and attack_event in pre_active_events_Ha(state_e[1], Ha.transition_function_ha) and attack_event[1] =='na':
            current_state_e=(G.current_state(state_e[0], attack_event[0]), current_state_Ha(state_e[1], attack_event, Ha.transition_function_ha), state_e[2])
-           print("ce2= ", current_state_e)
            if current_state_e in states_e and (state_e, attack_event, current_state_e) not in transition_function_e:
                transition_function_e.add((state_e, attack_event, current_state_e))
            if current_state_e not in states_e:
