@@ -59,7 +59,7 @@ initial_state_e=(G.initial_state, Ha.initial_state_ha, c_ir)
 states_e={initial_state_e}
 attack_events=Ha.attack_events
 transition_function_e=set()
-#build the event set and transitions of an estimator
+#build the state set and transitions of an estimator
 def Get_states_e(state_e):
     for attack_event in attack_events:
         if attack_event[0] in G.active_events(state_e[0]) and attack_event in pre_active_events_Ha(state_e[1], Ha.transition_function_ha) and state_e[2]>= C(attack_event) and attack_event[1] in {'sr', 'as'}:
